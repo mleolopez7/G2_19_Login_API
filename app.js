@@ -10,7 +10,7 @@ var express = require('express'),
 	faviconURL = `${__dirname}/public/img/node-favicon.png`,
 	publicDir = express.static(`${__dirname}/public`),
 	viewDir = `${__dirname}/views`,
-	port = (process.env.PORT || 5001),
+	port = (process.env.PORT || 5002),
     	app = express()
 
 app

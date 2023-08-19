@@ -9,6 +9,7 @@ router
   //.post("/usuario/login/:codigo_usuario", UsuarioController.login)
   .get("/usuario/getall", UsuarioController.getAll)
   .post("/usuario/insertar/:codigo_usuario", UsuarioController.post)
+  
   .use(UsuarioController.error404)
 
 module.exports = router;

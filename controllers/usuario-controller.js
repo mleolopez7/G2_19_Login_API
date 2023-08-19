@@ -1,24 +1,4 @@
 'use strict'
-//const jwt = require('jsonwebtoken');
-
-//CONTROL LOGIN
-//UsuarioController.login = (req, res, next) => {
-//    const { codigo_usuario, password } = req.body;
-//    if (validarCredenciales(codigo_usuario, password)) {
-//        const token = jwt.sign({ codigo_usuario }, 'secreto', { expiresIn: '1h' });
-//        res.status(200).json({ token });
-//    } else {
-//        res.status(401).json({ mensaje: 'Credenciales inválidas' });
-//    }
-//};
-
-// Función para validar las credenciales (simulación)
-//function validarCredenciales(codigo_usuario, password) {
-    // Aquí debes implementar la lógica de validación con tu modelo de usuario
-    // Por ejemplo, consultar la base de datos y comparar las credenciales
-    // Retornar true si las credenciales son válidas, o false si no lo son
-//    return codigo_usuario === 'usuario' && password === 'contraseña';
-//}
 
 //CONTROL GET ALL
 var UsuarioModel = require('../models/usuario-model'),
@@ -53,7 +33,7 @@ UsuarioController.post = (req, res, next) => {
         codigo_usuario : req.body.codigo_usuario,
         nombre : req.body.nombre,
         apellido : req.body.apellido,
-        password : req.body.password,
+        contra : req.body.contra,
         email : req.body.email,
         estado : req.body.estado,
         ultimo_ingreso : req.body.ultimo_ingreso,
