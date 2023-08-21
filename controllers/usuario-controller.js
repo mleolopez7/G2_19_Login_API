@@ -14,9 +14,8 @@ UsuarioController = () => {}
 // Nueva función para manejar el inicio de sesión
 UsuarioController.login = (req, res, next) => {
     const codigo_usuario = req.body.codigo_usuario;
-    const contra = req.body.contra;
 
-    UsuarioModel.login(codigo_usuario, contra, (err, rows) => {
+    UsuarioModel.login(codigo_usuario, (err, rows) => {
         if (err) {
             let locals = {
                 title: 'Error al iniciar sesión',
@@ -58,6 +57,28 @@ UsuarioController.getAll = (req, res, next) => {
     })
     UsuarioModel.use = req
 }
+
+//LLAMAR USUARIO
+UsuarioController.getOne = (req, res, next) => {
+  let codigo_usuario = req.body.codigo_usuario;
+  console.log(codigo_usuario);
+
+  UsuarioModel.getOne(codigo_usuario, (err, rows) => {
+    console.log(err, "---", rows);
+    if (err) {
+      let locals = {
+        title: `Error al buscar el registro con el id: ${codigo_usuario}`,
+        description: "Error de Sintaxis SQL",
+        error: err,
+      };
+      res.render("error", locals);
+    } else {
+     
+            res.send('El Usuario no Existe')
+
+    }
+  });
+};
 
 //CONTROL INSERTAR NUEVO USUARIO
 UsuarioController.post = (req, res, next) => {

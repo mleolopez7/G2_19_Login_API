@@ -6,11 +6,12 @@ var UsuarioController = require("../controllers/usuario-controller"),
 
 router
   //****USUARIO****
-  .post("/usuario/login/:codigo_usuario", UsuarioController.login)// Nueva ruta para el inicio de sesión
+  .post("/usuario/login/:codigo_usuario", UsuarioController.login) // Nueva ruta para el inicio de sesión
   .get("/usuario/getall", UsuarioController.getAll)
   .post("/usuario/insertar/:codigo_usuario", UsuarioController.post)
-  
-  .use(UsuarioController.error404)
+  .post("/usuario/getOne", UsuarioController.getOne)
+
+  .use(UsuarioController.error404);
 
 module.exports = router;
 
