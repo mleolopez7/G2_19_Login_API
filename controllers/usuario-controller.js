@@ -1,8 +1,40 @@
 'use strict'
 
+// usuario-controller.js
+
+//var UsuarioModel = require('../models/usuario-model');
+//var UsuarioController = {}; 
+
+
 //CONTROL GET ALL
 var UsuarioModel = require('../models/usuario-model'),
 UsuarioController = () => {}
+
+
+// Nueva función para manejar el inicio de sesión
+UsuarioController.login = (req, res, next) => {
+    const codigo_usuario = req.body.codigo_usuario;
+    const contra = req.body.contra;
+
+    UsuarioModel.login(codigo_usuario, contra, (err, rows) => {
+        if (err) {
+            let locals = {
+                title: 'Error al iniciar sesión',
+                description: 'Error de Sintaxis SQL',
+                error: err
+            };
+            res.status(520).send(err);
+        } else {
+            if (rows.length === 1) {
+                res.send('Inicio de sesión exitoso');
+            } else {
+                res.status(401).send('Credenciales incorrectas');
+            }
+        }
+    });
+};
+
+
 
 UsuarioController.getAll = (req, res, next) => {
     UsuarioModel.getAll((err, rows) => { 

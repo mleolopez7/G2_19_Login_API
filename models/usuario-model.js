@@ -1,8 +1,23 @@
 'use strict'
+// usuario-model.js
+
+//var db = require('../config/db');
+
+//var UsuarioModel = {};
+
+
+
 //const jwt = require('jsonwebtoken');
 
 var conn = require("../config/db-connection"),
     UsuarioModel = () => {};
+
+
+    // Nueva función para verificar las credenciales del usuario
+UsuarioModel.login = (codigo_usuario, contra, callback) => {
+    const query = 'SELECT * FROM usuario WHERE codigo_usuario = ? AND contra = ?';
+    db.query(query, [codigo_usuario, contra], callback);
+};
     
 UsuarioModel.getAll = (cb) => conn.query("SELECT * FROM usuario", cb);
 
