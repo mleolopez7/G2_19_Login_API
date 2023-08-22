@@ -11,29 +11,6 @@ var UsuarioModel = require('../models/usuario-model'),
 UsuarioController = () => {}
 
 
-// Nueva función para manejar el inicio de sesión
-UsuarioController.login = (req, res, next) => {
-    const codigo_usuario = req.body.codigo_usuario;
-
-    UsuarioModel.login(codigo_usuario, (err, rows) => {
-        if (err) {
-            let locals = {
-                title: 'Error al iniciar sesión',
-                description: 'Error de Sintaxis SQL',
-                error: err
-            };
-            res.status(520).send(err);
-        } else {
-            if (rows.length === 1) {
-                res.send('Inicio de sesión exitoso');
-            } else {
-                res.status(401).send('Credenciales incorrectas');
-            }
-        }
-    });
-};
-
-
 
 UsuarioController.getAll = (req, res, next) => {
     UsuarioModel.getAll((err, rows) => { 

@@ -12,31 +12,11 @@
 var conn = require("../config/db-connection");
 
 var UsuarioModel = {};
-UsuarioModel.login = async (codigo_usuario, contra) => {
-  try {
-    const query =
-      "SELECT * FROM Usuario WHERE codigo_usuario = $1 AND contra = $2";
-    const values = [codigo_usuario, contra];
 
-    const client = await conn.getClient();
-
-    const result = await client.query(query, values);
-
-    client.release();
-
-    if (result.rows.length === 0) {
-      return null;
-    }
-
-    return result.rows[0];
-  } catch (error) {
-    throw error;
-  }
-};
     // Nueva función para verificar las credenciales del usuario
-UsuarioModel.getOne = (codigo_usuario ,cb) => 
-    conn.query(
-        "Select * From usuario where codigo_usuario = $1", [codigo_usuario], cb);
+//UsuarioModel.getOne = (codigo_usuario ,cb) => 
+   // conn.query(
+   //     "Select * From usuario where codigo_usuario = $1", [codigo_usuario], cb);
 
     
 UsuarioModel.getAll = (cb) => conn.query("SELECT * FROM usuario", cb);
