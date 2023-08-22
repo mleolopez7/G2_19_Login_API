@@ -12,17 +12,17 @@ LoginController.login = (req, res, next) => {
     [codigo_usuario],
     (err, result) => {
       if (err) {
-        return res.status(500).json({ error: "Errores en el servidor" });
+        return res.status(500).json({ error: "Conexion no establecida con la base de datos" });
       }
 
       if (result.rows.length === 0) {
-        return res.status(401).json({ error: "Usuario no existe" });
+        return res.status(401).json({ error: "Usuario no registrado" });
       }
 
       const user = result.rows[0];
 
       if (user.estado !== "A") {
-        return res.status(401).json({ error: "Usuario inactivo" });
+        return res.status(401).json({ error: "Usuario deshabilitado" });
       }
 
       if (user.expira_pass) {
@@ -33,7 +33,7 @@ LoginController.login = (req, res, next) => {
 
         if (expiracionContraseña <= new Date()) {
           return res.status(401).json({
-            error: "La contraseña ha expirado, contactese con soporte",
+            error: "La contraseña expirada",
           });
         }
       }
@@ -49,13 +49,13 @@ LoginController.login = (req, res, next) => {
               if (updateErr) {
                 return res
                   .status(500)
-                  .json({ error: "Error al bloquear usuario" });
+                  .json({ error: "Ha excedido los limites de intentos" });
               }
 
               return res
                 .status(401)
                 .json({
-                  error: "Su usuario ha sido bloqueado por intentos fallidos",
+                  error: "Usuario bloqueado ",
                 });
             }
           );
@@ -69,7 +69,7 @@ LoginController.login = (req, res, next) => {
               if (updateErr) {
                 return res
                   .status(500)
-                  .json({ error: "Error al actualizar intentos" });
+                  .json({ error: "Fallo al restablecer intentos" });
               }
 
               return res.status(401).json({ error: message });
@@ -84,12 +84,12 @@ LoginController.login = (req, res, next) => {
             if (updateErr) {
               return res
                 .status(500)
-                .json({ error: "Error al restablecer intentos" });
+                .json({ error: "Fallo al restablecer intentos" });
             }
 
             return res
               .status(200)
-              .json({ message: "Validacion con exito", user });
+              .json({ message: "Contraseña restablecida con exito", user });
           }
         );
       }
