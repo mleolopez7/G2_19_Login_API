@@ -61,7 +61,7 @@ LoginController.login = (req, res, next) => {
           );
         } else {
           let remainingAttempts = 3 - user.intentos_incorrectos;
-          let message = `Contraseña incorrecta, te quedan ${remainingAttempts} intentos antes de que tu usuario sea bloqueado.`;
+          let message = `Contraseña incorrecta.`;
           conn.query(
             "UPDATE usuario SET intentos_incorrectos = $1 WHERE codigo_usuario = $2",
             [user.intentos_incorrectos, codigo_usuario],
