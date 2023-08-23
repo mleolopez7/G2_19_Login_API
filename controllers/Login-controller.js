@@ -21,9 +21,9 @@ LoginController.login = (req, res, next) => {
 
       const user = result.rows[0];
 
-      if (user.estado !== "A") {
-        return res.status(401).json({ error: "Usuario deshabilitado" });
-      }
+      //if (user.estado !== "A") {
+        //return res.status(401).json({ error: "Usuario deshabilitado" });
+      //}
 
       if (user.expira_pass) {
         const expiracionContraseña = new Date(user.ultimo_ingreso);
@@ -52,11 +52,11 @@ LoginController.login = (req, res, next) => {
                   .json({ error: "Ha excedido los limites de intentos" });
               }
 
-              return res
-                .status(401)
-                .json({
-                  error: "Usuario bloqueado ",
-                });
+              //return res
+                //.status(401)
+                //.json({
+                  //error: "Usuario bloqueado ",
+                //});
             }
           );
         } else {
@@ -66,11 +66,11 @@ LoginController.login = (req, res, next) => {
             "UPDATE usuario SET intentos_incorrectos = $1 WHERE codigo_usuario = $2",
             [user.intentos_incorrectos, codigo_usuario],
             (updateErr) => {
-              if (updateErr) {
-                return res
-                  .status(500)
-                  .json({ error: "Fallo al restablecer intentos" });
-              }
+              //if (updateErr) {
+                //return res
+                  //.status(500)
+                  //.json({ error: "Fallo al restablecer intentos" });
+             // }
 
               return res.status(401).json({ error: message });
             }
