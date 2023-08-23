@@ -11,7 +11,7 @@ router
   //****USUARIO****
   .post("/login/:codigo_usuario", LoginController.login) // Nueva ruta para el inicio de sesión
   .get("/usuario/getall", UsuarioController.getAll)
-  .post("/usuario/insertar/:codigo_usuario", UsuarioController.post)
+  .post("/nuevousuario/agregar/:codigo_usuario", UsuarioController.post)
 
 
   .use(UsuarioController.error404)
