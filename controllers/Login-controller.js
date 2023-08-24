@@ -19,13 +19,27 @@ LoginController.login = (req, res, next) => {
         return res.status(401).json({ error: "Usuario no encontrado" }); 
       }
 
-      // Comprobar la contraseña
+
       if (result.rows[0].contra !== contra) {
         return res.status(401).json({ error: "Contraseña incorrecta" });
       }
 
-      // Autenticación exitosa
-      return res.status(200).json({ message: "Ingreso Exitoso" });
+      var userData = {
+        codigo_usuario: result.rows[0].codigo_usuario,
+        nombre: result.rows[0].nombre,
+        apellido: result.rows[0].apellido,
+        contra: result.rows[0].contra,
+        email:result.rows[0].email,
+        estado:result.rows[0].estado,
+        ultimo_ingreso:result.rows[0].ultimo_ingreso,
+        expira_pass:result.rows[0].expira_pass,
+        dias_caducidad_pass:result.rows[0].dias_caducidad_pass,
+        rol:result.rows[0].rol,
+        intentos_incorrectos:result.rows[0].intentos_incorrectos,
+        fecha_registro:result.rows[0].fecha_registro
+      };
+
+      return res.status(200).json({ message: "Ingreso Exitoso", usuario: userData });
     }
   );
 };
